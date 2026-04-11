@@ -7,7 +7,7 @@ from datetime import datetime
 #  CONFIGURATION
 # ─────────────────────────────────────────
 
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1492653360653013083/M8j9txTXy8_c7sPWwu6aRzjEOnumCTxtlJBViaFoUN-iRQYe4nOrWkcPuVSRRUaKQsJ6"
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1492655191038890094/Sh8ahQHZ4d8r2TsiyCtEG1CtMp8KqzxEiLLYlKpSEXkCzkvnStDSPOmqT_-I_k6w1uKl"
 
 PUSHOVER_USER_KEY  = "u8mo5ey3zc4q2spwkv9xkthvfqocgo"
 PUSHOVER_API_TOKEN = "avgj8s6byu5ruwt1p5vnbjhpnuarzq"
