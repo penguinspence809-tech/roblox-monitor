@@ -7,10 +7,12 @@ from datetime import datetime
 #  CONFIGURATION
 # ─────────────────────────────────────────
 
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1492672980667469866/Ms1TAesX5lkShgUFyN-OF2coBFgwSP3Y6gZSbSE0O5jpBnKzvYE4k1pIaNnwULxzDbLp"
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1492655191038890094/Sh8ahQHZ4d8r2TsiyCtEG1CtMp8KqzxEiLLYlKpSEXkCzkvnStDSPOmqT_-I_k6w1uKl"
 
 PUSHOVER_USER_KEY  = "u8mo5ey3zc4q2spwkv9xkthvfqocgo"
 PUSHOVER_API_TOKEN = "avgj8s6byu5ruwt1p5vnbjhpnuarzq"
+
+ROBLOX_COOKIE = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_CAEaAhADIhwKBGR1aWQSFDE2NzM3NDA1MzY4MjA5NDM5MDY1KAQ.ZHurh_lmzfRsh2GCPONwzfxitF9u5PQZmWdOaEge9gtDyFwoCeOdHY7HSAdwslIaclPzSZ5UjSlITpY1OvTdxzcj0J726WBjYi0XIkK3VbYjeuvi5JkwB7YmrTvvAyRXud55VE7Jt7HIbQ-0A6mTlls9QaCVVbT4cJ3okOZwsZXGK9i_mJnWncZXIDZfp9c5Gjbri-fU5PCq0kTBa4ZDU2purhlWGIW210agIT5UB7kBg92JiKn3eVnCHxmRkVeSEwg5HvDE3zxECtLCGmwoOt3cVV4zmX4srhh9dsjj62xXGkPMz97zH_R205eO_ybrCNYO53ukEnAgKSWFc43kQtUOUwTJZsyhUzoWtjWq4C7S8VFfKck6Y9kg7dMAQYycnX7Mp4GSntby_LEzkvPYeiHL7luHSOQj4iAU53nBgM9SpyiBOAn_rx8omBj335saUcfZmTcWmD21o8rhdUdibqMLiI3-xLfX1a04cnnuZ9JnLiQD4aPQfKnS1Tz2Jzv2DjZGAsy0bdXIo-imXvEMCWx6S74m2iFM8v2ZTga_k1jZkNj5S1w6i6UCIHuWJWy3xv5QDgg32CcGmjsmIiyZ54tu0DODsdepu3f3gv_c-DUKImJEjUjO-QBmFLzqyUBV5J43atxaccNmrKchL4ftlDg8SLwEq2_miXZ4DbRrByzV_urFeFT4PM66YUks4gZ9C1MdOjPhsCY1tRZgdto4clUmJZxJcdb0PUDKGllIDq1Hy0LKbVjrmjXuOD8GDTA_5-5H7WbQsSCnyGGMKS64DVVLrWNNDSWD-t--1Ss9_P_MeOdxRStSXvKxeJQre4jpOb04Qg"
 
 ROBLOX_USER_ID = 338528360
 
@@ -93,6 +95,9 @@ def fetch_api_data() -> dict | None:
         response = requests.post(
             "https://presence.roblox.com/v1/presence/users",
             json={"userIds": [ROBLOX_USER_ID]},
+            headers={
+                "Cookie": f".ROBLOSECURITY={ROBLOX_COOKIE}"
+            },
             timeout=10
         )
         response.raise_for_status()
