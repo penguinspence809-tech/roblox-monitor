@@ -36,7 +36,7 @@ def send_discord(title: str, message: str) -> bool:
     try:
         response = requests.post(
             DISCORD_WEBHOOK_URL,
-            json={"content": f"**{title}**\n{message}"},
+            json={"content": f"@everyone **{title}**\n{message}"},
             timeout=10
         )
         if response.status_code == 204:
