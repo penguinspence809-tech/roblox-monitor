@@ -7,7 +7,7 @@ from datetime import datetime
 #  CONFIGURATION
 # ─────────────────────────────────────────
 
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1492655191038890094/Sh8ahQHZ4d8r2TsiyCtEG1CtMp8KqzxEiLLYlKpSEXkCzkvnStDSPOmqT_-I_k6w1uKl"
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1492672980667469866/Ms1TAesX5lkShgUFyN-OF2coBFgwSP3Y6gZSbSE0O5jpBnKzvYE4k1pIaNnwULxzDbLp"
 
 PUSHOVER_USER_KEY  = "u8mo5ey3zc4q2spwkv9xkthvfqocgo"
 PUSHOVER_API_TOKEN = "avgj8s6byu5ruwt1p5vnbjhpnuarzq"
@@ -34,11 +34,12 @@ logging.basicConfig(
 #  DISCORD NOTIFICATION
 # ─────────────────────────────────────────
 
-def send_discord(title: str, message: str) -> bool:
+def send_discord(title: str, message: str, ping_everyone: bool = False) -> bool:
     try:
+        prefix = "@everyone " if ping_everyone else ""
         response = requests.post(
             DISCORD_WEBHOOK_URL,
-            json={"content": f"@everyone **{title}**\n{message}"},
+            json={"content": f"{prefix}**{title}**\n{message}"},
             timeout=10
         )
         if response.status_code == 204:
@@ -82,8 +83,8 @@ def send_pushover(title: str, message: str, priority: int = 0) -> bool:
 #  SEND BOTH
 # ─────────────────────────────────────────
 
-def send_notification(title: str, message: str, priority: int = 0):
-    send_discord(title, message)
+def send_notification(title: str, message: str, ping_everyone: bool = False, priority: int = 0):
+    send_discord(title, message, ping_everyone)
     send_pushover(title, message, priority)
 
 # ─────────────────────────────────────────
@@ -111,7 +112,7 @@ def fetch_api_data() -> dict | None:
 #  FORMAT ALERT MESSAGE
 # ─────────────────────────────────────────
 
-def format_message(data: dict) -> tuple[str, str]:
+def format_message(data: dict) -> tuple[str, str, int]:
     try:
         user = data["userPresences"][0]
         presence_type = user.get("userPresenceType", 0)
@@ -128,10 +129,10 @@ def format_message(data: dict) -> tuple[str, str]:
 
         title   = f"Roblox Alert — {timestamp}"
         message = f"Status: {status}\nLocation: {last_location}"
-        return title, message
+        return title, message, presence_type
 
     except Exception as e:
-        return "Roblox Alert", f"Could not parse response: {e}"
+        return "Roblox Alert", f"Could not parse response: {e}", 0
 
 # ─────────────────────────────────────────
 #  MAIN LOOP
@@ -152,8 +153,10 @@ def main():
             current_status = user.get("userPresenceType", 0)
 
             if current_status != last_status:
-                title, message = format_message(data)
-                send_notification(title, message)
+                title, message, presence_type = format_message(data)
+                # Only ping everyone if status is NOT offline (0)
+                ping = presence_type != 0
+                send_notification(title, message, ping_everyone=ping)
                 last_status = current_status
             else:
                 logging.info(f"Status unchanged ({current_status}), no notification sent.")
@@ -161,6 +164,7 @@ def main():
             send_notification(
                 "⚠️ Roblox API Failed",
                 f"Could not reach Roblox presence API at {datetime.now().strftime('%H:%M:%S')}",
+                ping_everyone=False,
                 priority=1
             )
 
