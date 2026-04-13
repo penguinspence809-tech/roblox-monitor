@@ -102,7 +102,7 @@ def fetch_api_data() -> dict | None:
             timeout=10
         )
         response.raise_for_status()
-        logging.info(f"API fetch successful — status {response.status_code}")
+        logging.info(f"API response: {response.json()}") # add this line
         return response.json()
     except requests.RequestException as e:
         logging.error(f"API fetch failed: {e}")
