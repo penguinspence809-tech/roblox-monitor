@@ -19,7 +19,7 @@ ROBLOX_COOKIE = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-
 
 ROBLOX_USER_ID = 338528360
 TARGET_PLACE_ID = 1458767429
-FETCH_INTERVAL = 10
+FETCH_INTERVAL = 20
 
 # ─────────────────────────────────────────
 #  LOGGING
