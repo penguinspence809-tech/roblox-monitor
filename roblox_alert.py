@@ -8,7 +8,7 @@ from datetime import datetime
 # ─────────────────────────────────────────
 
 DISCORD_WEBHOOKS = [
-    "https://discord.com/api/webhooks/1492672980667469866/Ms1TAesX5lkShgUFyN-OF2coBFgwSP3Y6gZSbSE0O5jpBnKzvYE4k1pIaNnwULxzDbLp",
+    "https://discord.com/api/webhooks/1496654101071528090/5ixB2oCo3cxEvoYDGP4E9K24Tg59v5wUXKyx37_b-cVbkvOTxDmn-J1zW1rihADNVS0q",
     "https://discordapp.com/api/webhooks/1493069417783885824/VpNsPGKC25BJysQsWPwmqY5uiBDr1GSz-pEBNX5JHxUuUZZdA8ryVaX6Gp-tJk2vtpyK"
 ]
 
